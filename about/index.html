@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>O NÁS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/x-icon" href="/assets/logo_white.png">
+</head>
+<body>
+  <nav>
+    <div class="logo"><a href="/home/"><img src="/assets/logo_white.png" alt="logo" /></a></div>
+    <div class="nav-items">
+      <a href="/photo-report/">PHOTO REPORTS</a>
+      <a href="/about/">O NÁS</a>
+      <a href="/akce/">AKCE</a>
+      <a href="/kontakt/">KONTAKT</a>
+    </div>
+    <div class="toggle_btn">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </nav>
+
+  <div class="dropdown_menu">
+    <ul>
+      <li><a href="/photo-report/">PHOTO REPORTS</a></li>
+      <li><a href="/about/">O NÁS</a></li>
+      <li><a href="/akce/">AKCE</a></li>
+      <li><a href="/kontakt/">KONTAKT</a></li>
+    </ul>
+  </div>
+
+  <main>
+    <div class="container1">
+      <h1>O NÁS</h1>
+    </div>
+
+    <div class="container2">
+      <img src="/assets/logo_blaxk.png" alt="logo o nás" />
+      <div class="text2">
+        <h2>Kdo jsme?</h2>
+        <p>Jsme tym mladych lidi, co maji radi hudbu, tanec a nezapomenutelne vecery. Poradame akce po cele zemi, ktere vytvareji skvelou naladu, dobrou hudbu a nove zazitky.</p>
+        <p>Nasim cilem je prinest lidem radost, energii a FEVER!</p>
+        <p>Pridej se k nam a uzij si noc, na kterou nezapomenes!</p>        
+      </div>
+    </div>
+
+    <footer>
+      <div class="container-footer">
+        <div class="socky">
+          <h1>SOCIAL SITES</h1>
+          <a href="https://instagram.com/partiesfever"><i class="fa-brands fa-instagram"></i> partiesfever</a>
+          <a href="https://www.tiktok.com/@partiesfever"><i class="fa-brands fa-tiktok"></i> partiesfever</a>
+        </div>
+        <div class="kontakt">
+          <h1>KONTAKT</h1>
+          <a href="tel:+420236823830"><i class="fa-solid fa-phone"></i> +420 236 823 830</a>
+          <a href="mailto:info@parties-fever.cz"><i class="fa-solid fa-envelope"></i> info@parties-fever.cz</a>
+        </div>
+      </div>
+      <div class="credit">
+        <p>Created with ❤️ by <a href="https://martyc.eu">martyc.eu</a></p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const toggleBtn = document.querySelector('.toggle_btn');
+    const toggleBtnIcon = document.querySelector('.toggle_btn i');
+    const dropDownMenu = document.querySelector('.dropdown_menu');
+
+    toggleBtn.onclick = function () {
+      dropDownMenu.classList.toggle('open');
+      const isOpen = dropDownMenu.classList.contains('open');
+
+      toggleBtnIcon.classList.remove('fa-bars', 'fa-xmark');
+      toggleBtnIcon.classList.add(isOpen ? 'fa-xmark' : 'fa-bars');
+    };
+  </script>
+</body>
+</html>
