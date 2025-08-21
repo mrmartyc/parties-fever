@@ -1,0 +1,451 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Zen Dots", sans-serif;
+}
+
+nav {
+    height: 80px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem calc((100vw - 1300px) / 2);
+    position: relative;
+}
+
+html, body {
+    height: 100%;
+    background-color: black;
+}
+
+/* Desktop verze */
+.discount-link-desktop {
+    display: inline-block;
+    background-color: #ff0066; /* růžová barva z obrázku */
+    color: #fff;
+    font-family: 'Zen Dots', sans-serif; /* zachovat font */
+    font-size: 1rem;
+    padding: 0.6rem 1.5rem; /* vertikální a horizontální padding */
+    border-radius: 50px; /* kulaté rohy */
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  
+  .discount-link-desktop:hover {
+    background-color: #ff0066; /* tmavší růžová při hover */
+    color: #fff;
+  }
+  
+  /* Dropdown menu verze */
+  .discount-link-dropdown {
+    display: block;
+    background-color: #ff0066;
+    color: #fff;
+    font-family: 'Zen Dots', sans-serif;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    text-align: center;
+    margin: 0.3rem 0; /* oddělení v menu */
+  }
+  
+  .discount-link-dropdown:hover {
+    background-color: #ff0066;
+  }
+  
+
+/* Pozadí modalu */
+.modal {
+    display: none; /* defaultně skrytý */
+    position: fixed;
+    z-index: 10000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); /* tmavý průhledný overlay */
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  /* Obsah modalu */
+  .modal-content {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    position: relative;
+    animation: slideDown 0.3s ease;
+  }
+  
+  /* Nadpis */
+  .modal-content h2 {
+    margin-top: 0;
+    font-size: 20px;
+    text-align: center;
+    color: #ff0066;
+  }
+  
+  /* Zavírací tlačítko */
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+  }
+  .modal-close:hover {
+    color: #000;
+  }
+  
+  /* Formulář */
+  .modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+  }
+  
+  .modal-content label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .modal-content input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.3s;
+  }
+  
+  .modal-content input:focus {
+    border: 1px solid #ff0066;
+  }
+  
+  /* Tlačítko odeslat */
+  .submit-btn {
+    background: #ff0066;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .submit-btn:hover {
+    background: #cc0052;
+  }
+  
+  /* Animace */
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  @keyframes slideDown {
+    from {transform: translateY(-20px); opacity: 0;}
+    to {transform: translateY(0); opacity: 1;}
+  }
+
+.logo img {
+    width: 150px;
+    height: 150px;
+}
+
+.nav-items a {
+    margin: 0 1rem;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-items a:hover {
+    color: gray;
+}
+
+.toggle_btn {
+    display: none;
+    padding: 0 2rem;
+    cursor: pointer;
+}
+
+.toggle_btn i {
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* DROPDOWN MENU */
+.dropdown_menu {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+}
+
+.dropdown_menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.dropdown_menu li {
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.dropdown_menu li a {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown_menu li a:hover {
+    color: purple;
+}
+
+.dropdown_menu.open {
+    display: flex;
+}
+
+main {
+    display: grid;
+    align-items: center;
+    background: white;
+    text-align: center;
+}
+
+.container1 {
+    background-color: black;
+    color: white;
+    width: 100%;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.container1 h1 {
+    font-size: 5rem;
+}
+
+.btn1 {
+    background-color: purple;
+    border-radius: 50px;
+    width: 18rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn1:hover {
+    background-color: darkmagenta;
+}
+
+.container2 {
+    background-color: white;
+    color: black;
+    width: 100%;
+    padding: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    text-align: left;
+}
+
+.container2 img {
+    height: 300px;
+    width: 250px;
+    object-fit: cover;
+}
+
+.text2 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+}
+
+.text2 h2 {
+    font-size: 3rem;
+}
+
+.btn2 {
+    background-color: purple;
+    border-radius: 50px;
+    width: 15rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn2:hover {
+    background-color: darkmagenta;
+}
+
+footer {
+    background-color: black;
+    color: #fff;
+    text-align: center;
+}
+
+.container-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 2rem;
+}
+
+.socky,
+.kontakt {
+    flex: 1;
+    min-width: 200px;
+}
+
+.socky h1,
+.kontakt h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.socky a,
+.kontakt a {
+    font-size: 1rem;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 0.2rem 0;
+}
+
+.socky a:hover,
+.kontakt a:hover {
+    text-decoration: underline;
+}
+
+.credit {
+    padding: 1rem 0;
+}
+
+.credit a {
+    color: white;
+    text-decoration: none;
+}
+
+.credit a:hover {
+    color: red;
+}
+
+@media (max-width: 1024px) {
+    .container1 h1 {
+        font-size: 4rem;
+    }
+
+    .text2 h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container2 {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .container2 img {
+        width: 80%;
+        height: auto;
+    }
+
+    .text2 {
+        align-items: center;
+        text-align: center;
+    }
+
+    .btn2 {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .container1 h1 {
+        font-size: 3rem;
+    }
+
+    .btn1 {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    nav {
+        padding: 0 1rem;
+    }
+
+    .logo img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-items {
+        display: none;
+    }
+
+    .toggle_btn {
+        display: block;
+    }
+
+    .container1 h1 {
+        font-size: 2.2rem;
+    }
+
+    .btn1 {
+        font-size: 1rem;
+        height: 4rem;
+    }
+
+    .text2 h2 {
+        font-size: 2rem;
+    }
+
+    .container2 img {
+        width: 100%;
+    }
+
+    footer .container-footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}

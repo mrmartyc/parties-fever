@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parties Fever</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+      <link rel="icon" type="image/x-icon" href="/assets/logo_white.png">
+    </head>
+    <body>
+      <div id="discountModal" class="modal">
+        <div class="modal-content">
+          <button class="modal-close" onclick="closeModal()">×</button>
+          <h2>Žádost o slevu</h2>
+          <form id="discountForm">
+            <label for="jmeno">Jméno a příjmení:</label>
+            <input type="text" id="jmeno" required>
+    
+            <label for="instagram">Instagram:</label>
+            <input type="text" id="instagram" required>
+
+            <input type="text" name="website" style="display:none">
+    
+            <button type="submit" class="submit-btn">Odeslat</button>
+          </form>
+        </div>
+      </div>
+    
+      <script>
+        document.getElementById("myForm").addEventListener("submit", function(e) {
+          e.preventDefault();
+        
+          const form = new FormData(this);
+        
+          // pokud je honeypot vyplněný → je to bot
+          if (form.get("website")) {
+            alert("Bot zablokován!");
+            return;
+          }
+        });
+        </script>
+
+      <script type="module">
+        // 🔹 Ovládání popupu (sjednoceno)
+        window.openModal = () => document.getElementById("discountModal").style.display = "flex";
+        window.closeModal = () => document.getElementById("discountModal").style.display = "none";
+    
+        // zavření kliknutím mimo okno
+        window.onclick = function(event) {
+          const modal = document.getElementById("discountModal");
+          if (event.target === modal) {
+            closeModal();
+          }
+        }
+    
+        // 🔹 Firebase SDK import
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+    
+        const firebaseConfig = {
+          apiKey: "AIzaSyApC1GlxCF45If5mxUTKXTYhFKJtSG9eFk",
+          authDomain: "parties-fever.firebaseapp.com",
+          projectId: "parties-fever",
+          storageBucket: "parties-fever.firebasestorage.app",
+          messagingSenderId: "993690906404",
+          appId: "1:993690906404:web:33fcf92f2651266c1a0db1"
+        };
+    
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+    
+        // 🔹 Odeslání formuláře do Firestore
+        document.getElementById("discountForm").addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const jmeno = document.getElementById("jmeno").value;
+          const instagram = document.getElementById("instagram").value;
+    
+          try {
+            await addDoc(collection(db, "zadosti"), {
+              jmeno: jmeno,
+              instagram: instagram,
+              cas: serverTimestamp()
+            });
+            alert("Žádost byla odeslána!");
+            e.target.reset();
+            closeModal();
+          } catch (err) {
+            alert("Chyba při odesílání: " + err.message);
+          }
+        });
+      </script>
+    </body>
+    
+    <nav>
+        <div class="logo"><a href="/index.html"><img src="/assets/logo_white.png" alt="logo" /></a></div>
+        <div class="nav-items">
+            <a href="/photo-report/">PHOTO REPORTS</a>
+            <a href="/about/">O NÁS</a>
+            <a href="/akce/">AKCE</a>
+            <a href="/kontakt/">KONTAKT</a>
+            <a href="#" class="discount-link-desktop" onclick="openModal()">ŽÁDOST O SLEVU</a>
+        </div>
+        <div class="toggle_btn">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+    <div class="dropdown_menu">
+        <ul>
+            <li><a href="/photo-report/">PHOTO REPORTS</a></li>
+            <li><a href="/about/">O NÁS</a></li>
+            <li><a href="/akce/">AKCE</a></li>
+            <li><a href="/kontakt/">KONTAKT</a></li>
+            <li><a href="#" class="discount-link-dropdown" onclick="openModal()">ŽÁDOST O SLEVU</a></li>
+        </ul>
+    </div>
+    <main>
+        <div class="container1">
+            <h1>Parties Fever</h1>
+        </div>
+        <div class="container2" id="akce">
+            <h2 class="section-title">NEXT AKCE</h2>
+            <img src="/assets/konec_leta.jpeg" alt="akce" />
+            <div class="text2">
+              <!-- Odpočet -->
+              <div id="countdown" style="display: flex; gap: 20px; justify-content: center;">
+                <div style="text-align: center;">
+                  <div id="days" style="font-size: 2rem;">00</div>
+                  <div style="font-size: 0.8rem;">dní</div>
+                </div>
+                <div style="text-align: center;">
+                  <div id="hours" style="font-size: 2rem;">00</div>
+                  <div style="font-size: 0.8rem;">hodin</div>
+                </div>
+                <div style="text-align: center;">
+                  <div id="minutes" style="font-size: 2rem;">00</div>
+                  <div style="font-size: 0.8rem;">minut</div>
+                </div>
+                <div style="text-align: center;">
+                  <div id="seconds" style="font-size: 2rem;">00</div>
+                  <div style="font-size: 0.8rem;">sekund</div>
+                </div>
+              </div>
+          
+              <p>- Kdy: 29.8.2025 ⏰</p>
+              <p>- Kde: Music Club Admi Chomutov 🏢</p>
+              <p>- Prvních 70 lidí = Free Shot 🥃</p>
+              <a href="/akce/" class="btn2">VŠECHNY AKCE</a>
+            </div>
+          </div>
+          <script>
+            const dayEl = document.getElementById('days');
+            const hourEl = document.getElementById('hours');
+            const minEl = document.getElementById('minutes');
+            const secEl = document.getElementById('seconds');
+          
+            const targetDate = new Date("2025-08-29T22:00:00").getTime();
+          
+            function updateCountdown() {
+              const now = new Date().getTime();
+              const distance = targetDate - now;
+          
+              if (distance <= 0) {
+                dayEl.textContent = hourEl.textContent = minEl.textContent = secEl.textContent = "00";
+                clearInterval(interval);
+                return;
+              }
+          
+              const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+              const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+              const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          
+              dayEl.textContent = String(days).padStart(2, '0');
+              hourEl.textContent = String(hours).padStart(2, '0');
+              minEl.textContent = String(minutes).padStart(2, '0');
+              secEl.textContent = String(seconds).padStart(2, '0');
+            }
+          
+            updateCountdown();
+            const interval = setInterval(updateCountdown, 1000);
+          </script>
+          <div class="container3">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1455.2881799967383!2d13.399532417710054!3d50.465956690704935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470a1b13619c09a9%3A0x190c60aba4b0eb97!2sRestaurace%20%26%20Bar%20Admi!5e0!3m2!1sen!2scz!4v1755630545310!5m2!1sen!2scz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        <footer>
+            <div class="container-footer">
+                <div class="socky">
+                    <h1>SOCIAL SITES</h1>
+                    <a href="https://instagram.com/partiesfever"><i class="fa-brands fa-instagram"></i> partiesfever</a>
+                    <a href="https://www.tiktok.com/@partiesfever?_t=ZN-8z10RodzNVm&_r=1"><i class="fa-brands fa-tiktok"></i> partiesfever</a>
+                </div>
+            </div>
+            <div class="credit">
+              <p>© <span id="year"></span> Parties Fever. All rights reserved.</p>
+              <br>
+                <p>Created with ❤️ by <a href="https://martyc.eu">martyc.eu</a></p>
+                <script>
+                  document.getElementById("year").textContent = new Date().getFullYear();
+                </script>
+            </div>
+        </footer>
+    </main>
+    <script>
+        const toggleBtn = document.querySelector('.toggle_btn');
+        const toggleBtnIcon = document.querySelector('.toggle_btn i');
+        const dropDownMenu = document.querySelector('.dropdown_menu');
+
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open');
+            const isOpen = dropDownMenu.classList.contains('open');
+
+            toggleBtnIcon.classList.remove('fa-bars', 'fa-xmark');
+            toggleBtnIcon.classList.add(isOpen ? 'fa-xmark' : 'fa-bars');
+        };
+    </script>
+</body>
+</html>
