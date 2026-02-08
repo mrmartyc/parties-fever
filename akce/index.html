@@ -1,200 +1,270 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AKCE</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/x-icon" href="/assets/logo_white.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AKCE | Parties Fever</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Zen+Dots&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="icon" type="image/x-icon" href="/assets/logo_white.png">
 </head>
-
-<div id="discountModal" class="modal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeModal()">×</button>
-    <h2>Žádost o slevu</h2>
-    <form id="discountForm">
-      <label for="jmeno">Jméno a příjmení:</label>
-      <input type="text" id="jmeno" required>
-
-      <label for="instagram">Instagram:</label>
-      <input type="text" id="instagram" required>
-
-      <button type="submit" class="submit-btn">Odeslat</button>
-    </form>
-  </div>
-</div>
-
-<script type="module">
-  // 🔹 Ovládání popupu (sjednoceno)
-  window.openModal = () => document.getElementById("discountModal").style.display = "flex";
-  window.closeModal = () => document.getElementById("discountModal").style.display = "none";
-
-  // zavření kliknutím mimo okno
-  window.onclick = function(event) {
-    const modal = document.getElementById("discountModal");
-    if (event.target === modal) {
-      closeModal();
-    }
-  }
-
-  // 🔹 Firebase SDK import
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyApC1GlxCF45If5mxUTKXTYhFKJtSG9eFk",
-    authDomain: "parties-fever.firebaseapp.com",
-    projectId: "parties-fever",
-    storageBucket: "parties-fever.firebasestorage.app",
-    messagingSenderId: "993690906404",
-    appId: "1:993690906404:web:33fcf92f2651266c1a0db1"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  // 🔹 Odeslání formuláře do Firestore
-  document.getElementById("discountForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const jmeno = document.getElementById("jmeno").value;
-    const instagram = document.getElementById("instagram").value;
-
-    try {
-      await addDoc(collection(db, "zadosti"), {
-        jmeno: jmeno,
-        instagram: instagram,
-        cas: serverTimestamp()
-      });
-      alert("Žádost byla odeslána!");
-      e.target.reset();
-      closeModal();
-    } catch (err) {
-      alert("Chyba při odesílání: " + err.message);
-    }
-  });
-</script>
 <body>
-  <nav>
-    <div class="logo"><a href="/index.html"><img src="/assets/logo_white.png" alt="logo" /></a></div>
-    <div class="nav-items">
-      <a href="/photo-report/">PHOTO REPORTS</a>
-      <a href="/about/">O NÁS</a>
-      <a href="/akce/">AKCE</a>
-      <a href="/kontakt/">KONTAKT</a>
-      <a href="#" class="discount-link-desktop" onclick="openModal()">ŽÁDOST O SLEVU</a>
-    </div>
-    <div class="toggle_btn">
-      <i class="fa-solid fa-bars"></i>
-    </div>
-  </nav>
 
-  <div class="dropdown_menu">
-    <ul>
-      <li><a href="/photo-report/">PHOTO REPORTS</a></li>
-      <li><a href="/about/">O NÁS</a></li>
-      <li><a href="/akce/">AKCE</a></li>
-      <li><a href="/kontakt/">KONTAKT</a></li>
-      <li><a href="#" class="discount-link-dropdown" onclick="openModal()">ŽÁDOST O SLEVU</a></li>
-    </ul>
-  </div>
-  <main>
-    <!-- Aktuální akce -->
-    <div class="container1">
-      <h1>AKTUÁLNÍ AKCE</h1>
-    </div>
-    <div class="container2">
-      <img src="/assets/konec_leta.jpeg" alt="aktuální akce" />
-      <div class="text2">
-        <h2>Konec Léta</h2>
-        <p><strong>Kdy:</strong> 29. 8. 2025 ⏰</p>
-        <p><strong>Kde:</strong> Music Club Admi Chomutov 🏢</p>
-        <p><strong>Info:</strong> Prvních 70 lidí = Free Shot 🥃</p>
-      </div>
+    <div id="discountModal" class="modal">
+        <div class="modal-backdrop" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <h2 class="neon-text">ŽÁDOST O SLEVU</h2>
+            <p class="modal-subtitle">Získej vstup levněji! Stačí vyplnit.</p>
+            <form id="discountForm">
+                <div class="input-group">
+                    <label>Jméno a příjmení</label>
+                    <input type="text" id="jmeno" placeholder="Jan Novák" required>
+                </div>
+                <div class="input-group">
+                    <label>Instagram</label>
+                    <div class="ig-input">
+                        <span>@</span>
+                        <input type="text" id="instagram" placeholder="partiesfever" required>
+                    </div>
+                </div>
+                <input type="text" name="website" style="display:none">
+                <button type="submit" class="submit-btn">ODESLAT <i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
     </div>
 
-    <!-- Minulé akce -->
-    <div class="container1">
-      <h1>MINULÉ AKCE</h1>
-    </div>
-    <div class="container2">
-      <img src="/assets/still_summer.png" alt="akce 1" />
-      <div class="text2">
-        <h2>Still Summer Party</h2>
-        <p><strong>Kdy:</strong> 15. 8. 2025</p>
-        <p><strong>Kde:</strong> Club Admi Chomutov</p>
-        <p>Slunce a hudby - léto stále nekončí!</p>
-      </div>
-    </div>
-    <div class="container2">
-      <img src="/assets/ibiza.jpeg" alt="akce 1" />
-      <div class="text2">
-        <h2>Ibiza Party</h2>
-        <p><strong>Kdy:</strong> 1. 8. 2025</p>
-        <p><strong>Kde:</strong> Club Admi Chomutov</p>
-        <p>Přenesli jsme se na ostrov hudby a tance!🎶</p>
-      </div>
-    </div>
-    <div class="container2">
-      <img src="/assets/hawaii post-2.png" alt="akce 1" />
-      <div class="text2">
-        <h2>Hawaii Night</h2>
-        <p><strong>Kdy:</strong> 11. 7. 2025</p>
-        <p><strong>Kde:</strong> Club Admi Chomutov</p>
-        <p>Hawaii night přímo v Admi!🌺</p>
-      </div>
-    </div>
-    <div class="container2">
-      <img src="/assets/spring.png" alt="akce 1" />
-      <div class="text2">
-        <h2>Velikonoční Party</h2>
-        <p><strong>Kdy:</strong> 18. 4. 2025</p>
-        <p><strong>Kde:</strong> Club Admi Chomutov</p>
-        <p>Uvítali jsme velikonoce ve FEVERU!🌸🔥</p>
-      </div>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/index.html"><img src="/assets/logo_white.png" alt="Parties Fever" /></a>
+        </div>
+        
+        <div class="nav-links">
+            <a href="/photo-report/" class="nav-item">PHOTO REPORTS</a>
+            <a href="/about/" class="nav-item">O NÁS</a>
+            <a href="/akce/" class="nav-item active-link">AKCE</a>
+            <a href="/kontakt/" class="nav-item">KONTAKT</a>
+            <a href="#" class="nav-btn-glow" onclick="openModal()">ŽÁDOST O SLEVU</a>
+        </div>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        
+        <button class="close-menu-btn" onclick="toggleMenu()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="mobile-links">
+            <a href="/photo-report/" onclick="toggleMenu()">PHOTO REPORTS</a>
+            <a href="/about/" onclick="toggleMenu()">O NÁS</a>
+            <a href="/akce/" onclick="toggleMenu()">AKCE</a>
+            <a href="/kontakt/" onclick="toggleMenu()">KONTAKT</a>
+            <a href="#" class="mobile-btn" onclick="openModal(); toggleMenu()">ŽÁDOST O SLEVU</a>
+        </div>
     </div>
 
-    <div class="container2">
-      <img src="/assets/wildcats.png" alt="akce 2" />
-      <div class="text2">
-        <h2>WILDCATS NIGHT</h2>
-        <p><strong>Kdy:</strong> 21. 3. 2025</p>
-        <p><strong>Kde:</strong> Club Admi Chomutov</p>
-        <p>Tanec s kočičkama 🕺</p>
-      </div>
-    </div>
-    <footer>
-      <div class="container-footer">
-          <div class="socky">
-              <h1>SOCIAL SITES</h1>
-              <a href="https://instagram.com/partiesfever"><i class="fa-brands fa-instagram"></i> partiesfever</a>
-              <a href="https://www.tiktok.com/@partiesfever?_t=ZN-8z10RodzNVm&_r=1"><i class="fa-brands fa-tiktok"></i> partiesfever</a>
-          </div>
-      </div>
-      <div class="credit">
-        <p>© <span id="year"></span> Parties Fever. All rights reserved.</p>
-        <br>
-          <p>Created with ❤️ by <a href="https://martyc.eu">martyc.eu</a></p>
-          <script>
-            document.getElementById("year").textContent = new Date().getFullYear();
-          </script>
-      </div>
-  </footer>
-  </main>
-  <script>
-    const toggleBtn = document.querySelector('.toggle_btn');
-    const toggleBtnIcon = document.querySelector('.toggle_btn i');
-    const dropDownMenu = document.querySelector('.dropdown_menu');
+    <main>
+        <section class="page-header">
+            <div class="hero-overlay"></div>
+            <div class="header-content reveal">
+                <h1 class="glitch" data-text="KALENDÁŘ">KALENDÁŘ</h1>
+                <p>UPCOMING EVENTS</p>
+            </div>
+        </section>
 
-    toggleBtn.onclick = function () {
-      dropDownMenu.classList.toggle('open');
-      const isOpen = dropDownMenu.classList.contains('open');
-      toggleBtnIcon.classList.remove('fa-bars', 'fa-xmark');
-      toggleBtnIcon.classList.add(isOpen ? 'fa-xmark' : 'fa-bars');
-    };
-  </script>
+        <section class="events-section">
+            <div class="container">
+                <h2 class="section-title reveal">NEXT EVENT <span class="dot">.</span></h2>
+                
+                <div class="event-card reveal">
+                    <div class="event-img-col">
+                        <img src="/assets/konec_leta.jpeg" alt="Konec Léta" />
+                        <div class="date-badge">
+                            <span class="day">29</span>
+                            <span class="month">SRP</span>
+                        </div>
+                    </div>
+                    
+                    <div class="event-info-col">
+                        <h3>KONEC LÉTA 2025</h3>
+                        <p class="club-name"><i class="fa-solid fa-location-dot"></i> Music Club Admi Chomutov</p>
+                        
+                        <div class="perks" style="margin-top: 1rem;">
+                            <div class="perk"><i class="fa-solid fa-clock"></i> Start 22:00</div>
+                            <div class="perk"><i class="fa-solid fa-martini-glass"></i> Prvních 70 lidí = Free Shot</div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button onclick="openModal()" class="btn-primary" style="width: 100%;">ZAPSAT SE NA GUESTLIST</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-section" style="padding-top: 0;">
+            <div class="container">
+                <h2 class="section-title reveal">MINULÉ AKCE <span class="dot">.</span></h2>
+                
+                <div class="events-grid">
+                    
+                    <div class="past-event-card reveal">
+                        <div class="past-img-wrapper">
+                            <img src="/assets/still_summer.png" alt="Still Summer" />
+                            <div class="past-date">15. 8. 2025</div>
+                        </div>
+                        <div class="past-info">
+                            <h3>STILL SUMMER</h3>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Club Admi Chomutov</p>
+                            <p class="desc">Slunce a hudby - léto stále nekončí!</p>
+                        </div>
+                    </div>
+
+                    <div class="past-event-card reveal">
+                        <div class="past-img-wrapper">
+                            <img src="/assets/ibiza.jpeg" alt="Ibiza Party" />
+                            <div class="past-date">1. 8. 2025</div>
+                        </div>
+                        <div class="past-info">
+                            <h3>IBIZA PARTY</h3>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Club Admi Chomutov</p>
+                            <p class="desc">Přenesli jsme se na ostrov hudby a tance! 🎶</p>
+                        </div>
+                    </div>
+
+                    <div class="past-event-card reveal">
+                        <div class="past-img-wrapper">
+                            <img src="/assets/hawaii post-2.png" alt="Hawaii Night" />
+                            <div class="past-date">11. 7. 2025</div>
+                        </div>
+                        <div class="past-info">
+                            <h3>HAWAII NIGHT</h3>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Club Admi Chomutov</p>
+                            <p class="desc">Hawaii night přímo v Admi! 🌺</p>
+                        </div>
+                    </div>
+
+                    <div class="past-event-card reveal">
+                        <div class="past-img-wrapper">
+                            <img src="/assets/spring.png" alt="Velikonoční Party" />
+                            <div class="past-date">18. 4. 2025</div>
+                        </div>
+                        <div class="past-info">
+                            <h3>VELIKONOČNÍ PARTY</h3>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Club Admi Chomutov</p>
+                            <p class="desc">Uvítali jsme velikonoce ve FEVERU! 🌸🔥</p>
+                        </div>
+                    </div>
+
+                    <div class="past-event-card reveal">
+                        <div class="past-img-wrapper">
+                            <img src="/assets/wildcats.png" alt="Wildcats" />
+                            <div class="past-date">21. 3. 2025</div>
+                        </div>
+                        <div class="past-info">
+                            <h3>WILDCATS NIGHT</h3>
+                            <p class="location"><i class="fa-solid fa-location-dot"></i> Club Admi Chomutov</p>
+                            <p class="desc">Tanec s kočičkama 🕺</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="socials">
+                    <a href="https://instagram.com/partiesfever" target="_blank" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@partiesfever" target="_blank" class="social-link"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+                <p class="copyright">© <span id="year"></span> Parties Fever. Created by <a href="https://martyc.eu">martyc.eu</a></p>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Modal Logic
+        window.openModal = () => {
+            document.getElementById("discountModal").style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+        window.closeModal = () => {
+            document.getElementById("discountModal").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        // Reveal Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyApC1GlxCF45If5mxUTKXTYhFKJtSG9eFk",
+            authDomain: "parties-fever.firebaseapp.com",
+            projectId: "parties-fever",
+            storageBucket: "parties-fever.firebasestorage.app",
+            messagingSenderId: "993690906404",
+            appId: "1:993690906404:web:33fcf92f2651266c1a0db1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        document.getElementById("discountForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const form = new FormData(e.target);
+            if (form.get("website")) return;
+
+            const jmeno = document.getElementById("jmeno").value;
+            const instagram = document.getElementById("instagram").value;
+
+            try {
+                await addDoc(collection(db, "zadosti"), {
+                    jmeno: jmeno,
+                    instagram: instagram,
+                    cas: serverTimestamp()
+                });
+                alert("Žádost odeslána!");
+                e.target.reset();
+                closeModal();
+            } catch (err) {
+                alert("Chyba: " + err.message);
+            }
+        });
+    </script>
 </body>
 </html>
