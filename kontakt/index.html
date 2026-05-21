@@ -45,20 +45,14 @@
             <a href="/index.html"><img src="/assets/logo_white.png" alt="Parties Fever" /></a>
         </div>
         
-    <div class="mobile-menu" id="mobileMenu">
-        
-        <button class="close-menu-btn" onclick="toggleMenu()">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-
-        <div class="mobile-links">
-            <a href="/photo-report/" onclick="toggleMenu()">PHOTO REPORTS</a>
-            <a href="/about/" onclick="toggleMenu()">O NÁS</a>
-            <a href="/akce/" onclick="toggleMenu()">AKCE</a>
-            <a href="/kontakt/" onclick="toggleMenu()">KONTAKT</a>
-            <a href="#" class="mobile-btn" onclick="openModal(); toggleMenu()">ŽÁDOST O SLEVU</a>
+        <div class="nav-links">
+            <a href="/photo-report/" class="nav-item">PHOTO REPORTS</a>
+            <a href="/about/" class="nav-item">O NÁS</a>
+            <a href="/akce/" class="nav-item">AKCE</a>
+            <a href="/kontakt/" class="nav-item active-link">KONTAKT</a>
+            <a href="#" class="nav-btn-glow" onclick="openModal()">ŽÁDOST O SLEVU</a>
         </div>
-    </div>
+
         <div class="hamburger" onclick="toggleMenu()">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -67,7 +61,10 @@
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
-        <button class="close-menu-btn" onclick="toggleMenu()">×</button>
+        <button class="close-menu-btn" onclick="toggleMenu()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
         <div class="mobile-links">
             <a href="/photo-report/" onclick="toggleMenu()">PHOTO REPORTS</a>
             <a href="/about/" onclick="toggleMenu()">O NÁS</a>
